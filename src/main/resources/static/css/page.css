@@ -35,7 +35,7 @@ html, body {
     top: 1.2rem;
     bottom: 1.2rem;
     width: 6px;
-    border-left: 3px dotted #b6a58e;
+    border-left: 4px dotted #b6a58e;
 }
 
 p, h4, h5 {
@@ -102,8 +102,9 @@ h2, span {
     padding: 0.8rem 1.5rem;
     left: 20rem;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.8rem;
     cursor: pointer;
+    font-style: italic;
     box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.3);
     transform: rotate(-8deg);
     transition: all 0.2s ease;
@@ -123,27 +124,44 @@ h2, span {
     border-radius: 2px;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
 
-/* --- СТИЛЕН СКРОЛБАР --- */
-/* За Chrome, Edge, Safari */
-/*::-webkit-scrollbar {*/
-/*    width: 10px;*/
-/*}*/
+::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-/*::-webkit-scrollbar-track {*/
-/*    background: #f0f0f5;*/
-/*    border-radius: 10px;*/
-/*}*/
+::-webkit-scrollbar-thumb {
+    background: rgba(8, 17, 40, 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
 
-/*::-webkit-scrollbar-thumb {*/
-/*    background: linear-gradient(180deg, #081128, rgba(11, 26, 59, 0.55));*/
-/*    border-radius: 10px;*/
-/*    border: 2px solid #f0f0f5;*/
-/*}*/
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(8, 17, 40, 0.7);
+}
 
-/*::-webkit-scrollbar-thumb:hover {*/
-/*    background: linear-gradient(180deg, #081128, rgba(11, 26, 59, 0.55));*/
-/*}*/
+.search-bar {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.search-bar input {
+    width: 50%;
+    background-color: transparent;
+    padding: 0.6rem 1rem;
+    border: 2px dashed rgba(0,0,0,0.2);
+    border-radius: 8px;
+    font-family: "Comic Neue", cursive;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: rgba(79, 99, 141, 0.55);
+}
 
 @media (max-width: 600px) {
     .page-wrapper {
@@ -159,3 +177,5 @@ h2, span {
         padding: 1rem;
     }
 }
+
+

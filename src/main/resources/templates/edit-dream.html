@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Write a New Dream</title>
+  <title>Rewrite dream</title>
   <link rel="stylesheet" th:href="@{/css/editing.css}">
   <link rel="stylesheet" th:href="@{/css/main.css}">
   <link rel="stylesheet" th:href="@{/css/animatedObjects.css}">
@@ -17,43 +17,34 @@
 </div>
 <div class="cloud cloud1"></div>
 <div class="cloud cloud2"></div>
-<!--<div th:insert="~{constellations::sky}">-->
-<!--  <div class="constellation-svg"></div>-->
-<!--</div>-->
-<div class="sky-star">
-  <div class="shooting-star1"></div>
-  <div class="shooting-star2"></div>
-  <div class="shooting-star3"></div>
-</div>
 <div class="dream-wrapper">
   <p>Rewrite your dream</p>
   <form th:action="@{/dreams/edit}" method="post" th:object="${dream}">
     <input type="hidden" th:field="*{id}" />
-
     <div class="form-group">
-      <label for="title"></label>
+      <label for="title" style="font-family: 'Comic Neue', cursive; font-style: italic">Title</label>
       <input type="text" id="title" th:field="*{title}" placeholder="Add title" required>
     </div>
     <div class="form-group">
-      <label for="description"></label>
+      <label for="description" style="font-family: 'Comic Neue', cursive; font-style: italic">Description</label>
       <textarea id="description" th:field="*{description}" placeholder="Describe your dream..." required></textarea>
     </div>
     <div class="form-group">
-      <label for="date"></label>
+      <label for="date" style="font-family: 'Comic Neue', cursive; font-style: italic">Date</label>
       <input type="text" id="date" th:field="*{date}" placeholder="Dream date" required>
     </div>
     <div class="form-group">
-      <label for="mood-before-sleep"></label>
+      <label for="mood-before-sleep" style="font-family: 'Comic Neue', cursive; font-style: italic">Mood before sleep (1-10)</label>
       <input type="number" min="1" max="10" id="mood-before-sleep"
              th:field="*{moodBeforeSleep}" placeholder="Mood before sleep (1-10)" required>
     </div>
     <div class="form-group">
-      <label for="mood-after-waking"></label>
+      <label for="mood-after-waking" style="font-family: 'Comic Neue', cursive; font-style: italic">Mood after waking up (1-10)</label>
       <input type="number" min="1" max="10" id="mood-after-waking"
              th:field="*{moodAfterWaking}" placeholder="Mood after waking up (1-10)" required>
     </div>
     <div class="form-group">
-      <label for="lucidity"></label>
+      <label for="lucidity" style="font-family: 'Comic Neue', cursive; font-style: italic">How much control did you have (1-5)</label>
       <input type="number" min="1" max="5" id="lucidity"
              th:field="*{lucidityLevel}" placeholder="How much control did you have? (1-5)" required>
     </div>
@@ -61,12 +52,12 @@
       <label class="custom-checkbox">
         <input type="hidden" name="nightmare" value="false"/>
         <input class="switch" type="checkbox" id="nightmare" th:field="*{nightmare}" />
-        <span style="color: rgba(80, 70, 60, 0.6); font-style: italic;">Nightmare?</span>
+        <span  style="color: rgba(80, 70, 60, 0.6); font-style: italic; font-family: 'Comic Neue',serif">Nightmare?</span>
       </label>
     </div>
-    <button type="submit">SAVE</button>
   </form>
-  <a th:href="@{/user-own-page}" class="back-link">GO BACK</a>
+  <button type="submit" style="font-style: italic; top: -1rem">Save</button>
+  <a th:href="@{/user-own-page}" style="font-style: italic; left: 21rem" class="back-link">Back to all dreams</a>
 </div>
 
 <script>

@@ -4,71 +4,67 @@
     <meta charset="UTF-8"/>
     <title th:text="'Dream - ' + ${dream.title}">Dream Info</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animatedObjects.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/page.css}"/>
 </head>
 <body>
+<div class="moon-wrapper">
+    <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<!--<div class="sky-star">-->
+<!--    <div class="shooting-star1"></div>-->
+<!--    <div class="shooting-star2"></div>-->
+<!--    <div class="shooting-star3"></div>-->
+<!--</div>-->
 <div class="page-wrapper">
-    <!-- Заглавие -->
     <h2 th:text="${dream.title}">Dream Title</h2>
-
-    <!-- Детайли за съня -->
     <div class="dream-details">
-        <p><strong>Description:</strong></p>
         <p th:text="${dream.description}">Dream description...</p>
-
-        <p><strong>Date:</strong>
-            <span th:text="${dream.date}">2025-10-03</span>
+        <br>
+        <div class="mood-change">
+            <span id="mood-before" th:text="${dream.moodBeforeSleep}" hidden="hidden">5</span>
+            <span id="mood-after" th:text="${dream.moodAfterWaking}" hidden="hidden">7</span>
+            <p id="mood-result"></p>
+        </div>
+        <br>
+        <p style="font-family: 'Comic Neue', cursive; font-style: italic; color: #3b2f2f; line-height: 1.6;">
+            On <span th:text="${dream.date}" style="font-family: 'Comic Neue', cursive; font-size: 1rem">2025-10-03</span>,
+            <span th:text="${dream.user.username}" style="font-family: 'Comic Neue', cursive; font-size: 1rem">User</span> had a dream
+            that was
+            <span th:text="${dream.nightmare} ? 'a nightmare' : 'peaceful'" style="font-family: 'Comic Neue', cursive; font-size: 1rem">peaceful</span>
+            with a lucidity level of <span th:text="${dream.lucidityLevel}" style="font-family: 'Comic Neue', cursive; font-size: 1rem">3</span>.
         </p>
 
-        <p><strong>Author:</strong>
-            <span th:text="${dream.user.username}">User</span>
-        </p>
     </div>
 
-    <hr/>
-
-    <!-- Форма за редакция -->
-    <h3>Edit this dream</h3>
-    <form th:action="@{'/dreams/full-info-dream/' + ${dream.id}}" method="post" th:object="${dream}" class="dream-form">
-        <label>Title</label>
-        <label>
-            <input type="text" th:field="*{title}" placeholder="Dream title"/>
-        </label>
-
-        <label>Description</label>
-        <label>
-            <textarea th:field="*{description}" placeholder="Dream description..."></textarea>
-        </label>
-
-        <label>Date</label>
-        <label>
-            <input type="date" th:field="*{date}"/>
-        </label>
-
-        <label>Mood before sleep</label>
-        <label>
-            <input type="number" th:field="*{moodBeforeSleep}"/>
-        </label>
-
-        <label>Mood after waking up</label>
-        <label>
-            <input type="number" th:field="*{moodAfterWaking}"/>
-        </label>
-
-        <label>Lucidity level</label>
-        <label>
-            <input type="number" th:field="*{lucidityLevel}"/>
-        </label>
-
-        <label>Nightmare</label>
-        <label>
-            <input type="checkbox" th:field="*{lucidityLevel}"/>
-        </label>
-        <button type="submit">Save changes</button>
-    </form>
-
     <p>
-        <a th:href="@{/user-own-page}">← Back to all dreams</a>
+        <a th:href="@{/user-own-page}" class="btn" style="top: 2.5rem; left: 23rem">Back to all dreams</a>
     </p>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const moodBefore = parseInt(document.getElementById('mood-before').textContent);
+        const moodAfter = parseInt(document.getElementById('mood-after').textContent);
+
+        const change = moodAfter - moodBefore;
+        const resultElement = document.getElementById('mood-result');
+
+        if (change > 0) {
+            resultElement.textContent = `You woke up happier by ${change} points!`;
+            resultElement.style.color = 'green';
+        } else if (change < 0) {
+            resultElement.textContent = `You woke up sadder by ${Math.abs(change)} points...`;
+            resultElement.style.color = 'red';
+        } else {
+            resultElement.textContent = "Your mood didn't change after this dream";
+            resultElement.style.color = 'gray';
+        }
+    });
+</script>
 </body>
 </html>

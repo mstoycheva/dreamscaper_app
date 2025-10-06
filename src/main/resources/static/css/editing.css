@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
+html, body {
+    overflow-y: auto;
+
+}
 .dream-wrapper {
     background: repeating-linear-gradient(
             #faf8f4,
@@ -17,6 +21,7 @@
     color: #3b2f2f;
     position: relative;
     line-height: 1.8;
+
 }
 
 .dream-wrapper::before {
@@ -157,6 +162,7 @@ button {
     top: 3rem;
     left: 20rem;
     /*border-radius: 4px;*/
+    font-style: italic;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
@@ -188,6 +194,7 @@ button::before {
     /*border-radius: 4px;*/
     font-weight: bold;
     font-size: 1rem;
+    font-style: italic;
     cursor: pointer;
     box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.3);
     transform: rotate(6deg);
@@ -209,4 +216,24 @@ button::before {
     border-radius: 2px;
 }
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 10px;
+}
 
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: rgba(8, 17, 40, 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+    background: rgba(8, 17, 40, 0.7);
+}

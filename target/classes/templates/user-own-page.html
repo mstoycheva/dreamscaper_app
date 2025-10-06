@@ -17,19 +17,16 @@
 </div>
 <div class="cloud cloud1"></div>
 <div class="cloud cloud2"></div>
-<!--<div th:insert="~{constellations::sky}">-->
-<!--  <div class="constellation-svg"></div>-->
+<!--<div class="sky-star">-->
+<!--    <div class="shooting-star1"></div>-->
+<!--    <div class="shooting-star2"></div>-->
+<!--    <div class="shooting-star3"></div>-->
 <!--</div>-->
-<div class="sky-star">
-    <div class="shooting-star1"></div>
-    <div class="shooting-star2"></div>
-    <div class="shooting-star3"></div>
-</div>
 <div class="page-wrapper">
     <h2>
         <span th:text="${user.getUsername()}"></span>'s dreams
     </h2>
-    <div th:if="${user.getAuthorities() == 'admin'}">
+    <div th:if="${user.getAuthorities() == 'ADMIN'}">
         <p>Admin panel</p>
         <h3>All dreams</h3>
         <div th:if="${#lists.isEmpty(dreams)}">
@@ -40,19 +37,42 @@
             <p th:text="${dream.description}">Dream description...</p>
         </div>
     </div>
-    <div th:if="${user.getAuthorities() != 'admin'}">
+    <a class="btn" style="transform: rotate(5deg); left: 22rem; margin-top: -2rem;" th:href="@{/dreams/add}">Share a new dream</a>
+    <div class="search-bar">
+        <label for="dreamSearch"></label><input type="text" id="dreamSearch" placeholder="Search dreams...">
+    </div>
+
+    <div th:if="${user.getAuthorities() != 'ADMIN'}">
         <div th:if="${#lists.isEmpty(user.dreams)}">
-            <p>No dreams.</p>
-            <a th:href="@{/dreams/add}">Add a new dream</a>
+            <p>You have shared no dreams for now!</p>
         </div>
         <div th:each="dream : ${user.dreams}" class="dream-card">
             <h4 th:text="${dream.title}">Dream Title</h4>
             <h5 class="truncate" th:text="${dream.description}">Dream description...</h5>
-            <a class="btn" th:href="@{/full-info-dream/{id}(id=${dream.id})}">OPEN</a>
-            <a class="btn" th:href="@{/dreams/edit/{id}(id=${dream.id})}">REWRITE</a>
+            <a class="btn" th:href="@{/full-info-dream/{id}(id=${dream.id})}">Open</a>
+            <a class="btn" th:href="@{/dreams/edit/{id}(id=${dream.id})}">Rewrite</a>
         </div>
-        <a class="btn" th:href="@{/dreams/add}">ADD</a>
     </div>
 </div>
+
+<script>
+    const searchInput = document.getElementById('dreamSearch');
+    const dreamCards = document.querySelectorAll('.dream-card');
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+
+        dreamCards.forEach(card => {
+            const title = card.querySelector('h4, h3')?.textContent.toLowerCase() || '';
+            const description = card.querySelector('h5, p')?.textContent.toLowerCase() || '';
+
+            if (title.includes(query) || description.includes(query)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
 </html>

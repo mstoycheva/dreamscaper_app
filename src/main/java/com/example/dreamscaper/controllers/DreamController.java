@@ -96,18 +96,17 @@ public class DreamController {
         return new RedirectView("/user-own-page");
     }
 
-    @GetMapping(value = "/full-info-dream/{id}")
+    @GetMapping("/full-info-dream/{id}")
     public String editUser(@PathVariable UUID id, Model model) {
         Dream dream = dreamService.getDream(id);
         model.addAttribute("dream", dream);
         return "full-info-dream";
     }
 
-    @PostMapping("/full-info-dream/{id}")
-    public String updateDreamInfo(@PathVariable Long id,
-                                  @ModelAttribute("dream") Dream updatedDream) {
+    @PostMapping("/full-info-dream")
+    public String updateDreamInfo(@ModelAttribute("dream") Dream updatedDream) {
         dreamService.editDream(updatedDream);
-        return "redirect:/dreams/full-info-dream/" + id;
+        return "redirect:/user-own-page";
     }
 
 }
