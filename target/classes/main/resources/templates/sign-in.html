@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign In</title>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/signIn.css" th:href="@{/css/signIn.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css}"/>
+</head>
+<body>
+<div class="moon-wrapper">
+  <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<!--<div th:insert="~{constellations::sky}">-->
+<!--  <div class="constellation-svg"></div>-->
+<!--</div>-->
+<div class="sky-star">
+  <div class="shooting-star1"></div>
+  <div class="shooting-star2"></div>
+  <div class="shooting-star3"></div>
+</div>
+<div class="login-wrapper" role="main">
+  <div class="login-container">
+    <form class="login-form" th:action="@{/sign-in}" method="post" autocomplete="on" novalidate>
+      <h2>Sign in to your account</h2>
+
+<!--      <div th:if="${error}" th:text="${error}" style="color:red;"></div>-->
+
+      <div class="input-wrapper">
+        <i class="fa fa-user"></i>
+        <label>
+          <input name="username" id="username" type="text" placeholder="Username" autocomplete="username" required/>
+        </label>
+      </div>
+
+
+      <div class="input-wrapper">
+        <i class="fa fa-lock"></i>
+        <label>
+          <input name="password" id="password" type="password" placeholder="Password" autocomplete="current-password" required/>
+        </label><i class="fa fa-eye-slash toggle-password" id="togglePassword"></i>
+      </div>
+
+
+      <button type="submit">Sign In</button>
+
+      <div class="login-extra">
+        <label class="custom-checkbox">
+          <input class="switch" type="checkbox">
+          <span style="color:#8ec1ff">Remember me?</span>
+        </label>
+
+        <a th:href="@{/forgot-password}" role="button" href="/forgot-password">Forgot password?</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+
+  togglePassword.addEventListener("click", function () {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+
+    this.classList.toggle("fa-eye");
+    this.classList.toggle("fa-eye-slash");
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="'Dream - ' + ${dream.title}">Dream Info</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- Заглавие -->
+    <h2 th:text="${dream.title}">Dream Title</h2>
+
+    <!-- Детайли за съня -->
+    <div class="dream-details">
+        <p><strong>Description:</strong></p>
+        <p th:text="${dream.description}">Dream description...</p>
+
+        <p><strong>Date:</strong>
+            <span th:text="${dream.date}">2025-10-03</span>
+        </p>
+
+        <p><strong>Author:</strong>
+            <span th:text="${dream.user.username}">User</span>
+        </p>
+    </div>
+
+    <hr/>
+
+    <!-- Форма за редакция -->
+    <h3>Edit this dream</h3>
+    <form th:action="@{'/dreams/full-info-dream/' + ${dream.id}}" method="post" th:object="${dream}" class="dream-form">
+        <label>Title</label>
+        <label>
+            <input type="text" th:field="*{title}" placeholder="Dream title"/>
+        </label>
+
+        <label>Description</label>
+        <label>
+            <textarea th:field="*{description}" placeholder="Dream description..."></textarea>
+        </label>
+
+        <label>Date</label>
+        <label>
+            <input type="date" th:field="*{date}"/>
+        </label>
+
+        <label>Mood before sleep</label>
+        <label>
+            <input type="number" th:field="*{moodBeforeSleep}"/>
+        </label>
+
+        <label>Mood after waking up</label>
+        <label>
+            <input type="number" th:field="*{moodAfterWaking}"/>
+        </label>
+
+        <label>Lucidity level</label>
+        <label>
+            <input type="number" th:field="*{lucidityLevel}"/>
+        </label>
+
+        <label>Nightmare</label>
+        <label>
+            <input type="checkbox" th:field="*{lucidityLevel}"/>
+        </label>
+        <button type="submit">Save changes</button>
+    </form>
+
+    <p>
+        <a th:href="@{/user-own-page}">← Back to all dreams</a>
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreams Page</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/signIn.css" th:href="@{/css/signIn.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .list-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        input, textarea, button {
+            padding: 8px;
+            font-size: 14px;
+        }
+        label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<h2>My Dreams</h2>
+
+<!-- Dream form -->
+<form id="dreamForm">
+    <label for="title"></label><input type="text" id="title" placeholder="Title" required />
+    <label for="description"></label><textarea id="description" placeholder="Description" required></textarea>
+    <label for="date"></label><input type="date" id="date" required />
+    <label for="moodBefore"></label><input type="number" id="moodBefore" min="1" max="10" value="5" placeholder="Mood before sleep" />
+    <label for="moodAfter"></label><input type="number" id="moodAfter" min="1" max="10" value="5" placeholder="Mood after waking" />
+    <label for="lucidity"></label><input type="number" id="lucidity" min="0" max="5" value="0" placeholder="Lucidity level" />
+    <label>
+        Nightmare:
+        <input type="checkbox" id="nightmare" />
+    </label>
+    <button type="submit" id="submitBtn">Create Dream</button>
+    <p id="formError" class="error"></p>
+</form>
+
+<!-- Loading / error messages -->
+<p id="loadingMsg" style="display:none;">Loading dreams...</p>
+<p id="errorMsg" class="error"></p>
+
+<!-- List of dreams -->
+<div class="list-container" id="dreamList"></div>
+
+</body>
+</html>

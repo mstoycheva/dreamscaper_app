@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Starting Page</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+    <style>
+        .animated-title .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="main-wrapper">
+    <div class="moon-wrapper">
+        <div class="moon"></div>
+    </div>
+    <div class="stars"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+
+    <main class="main-content">
+        <h1 class="petit-formal-script-small glow-text animated-title">
+            <br>
+            <span class="letter" style="animation-delay: 0s">A</span>
+            <span class="letter" style="animation-delay: 0.1s">n</span>
+            <span class="letter" style="animation-delay: 0.2s">o</span>
+            <span class="letter" style="animation-delay: 0.3s">t</span>
+            <span class="letter" style="animation-delay: 0.4s">h</span>
+            <span class="letter" style="animation-delay: 0.5s">e</span>
+            <span class="letter" style="animation-delay: 0.6s">r</span>
+            <span class="letter" style="animation-delay: 0.7s">&nbsp;</span>
+            <span class="letter" style="animation-delay: 0.8s">n</span>
+            <span class="letter" style="animation-delay: 0.9s">i</span>
+            <span class="letter" style="animation-delay: 1s">g</span>
+            <span class="letter" style="animation-delay: 1.1s">h</span>
+            <span class="letter" style="animation-delay: 1.2s">t</span>
+            <span class="letter" style="animation-delay: 1.3s">,</span>
+            <span class="letter" style="animation-delay: 1.4s">&nbsp;</span>
+            <span class="letter" style="animation-delay: 1.5s">a</span>
+            <span class="letter" style="animation-delay: 1.6s">n</span>
+            <span class="letter" style="animation-delay: 1.7s">o</span>
+            <span class="letter" style="animation-delay: 1.8s">t</span>
+            <span class="letter" style="animation-delay: 1.9s">h</span>
+            <span class="letter" style="animation-delay: 2s">e</span>
+            <span class="letter" style="animation-delay: 2.1s">r</span>
+            <span class="letter" style="animation-delay: 2.2s">&nbsp;</span>
+            <span class="letter" style="animation-delay: 2.3s">d</span>
+            <span class="letter" style="animation-delay: 2.4s">r</span>
+            <span class="letter" style="animation-delay: 2.5s">e</span>
+            <span class="letter" style="animation-delay: 2.6s">a</span>
+            <span class="letter" style="animation-delay: 2.7s">m</span>
+        </h1>
+
+        <p class="main-p space-grotesk-main-p">
+            Use our services and sign in!
+            <a class="main-a" th:href="@{/sign-in}" role="button">Sign in</a>
+            <br />
+            Oh, you don't have an account? No worries!
+            <a class="main-a" th:href="@{/sign-up}" role="button">Sign up</a>
+        </p>
+        <div class="stars"></div>
+    </main>
+</div>
+</body>
+</html>

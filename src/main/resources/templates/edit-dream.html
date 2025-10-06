@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Write a New Dream</title>
+  <link rel="stylesheet" th:href="@{/css/editing.css}">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/animatedObjects.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="moon-wrapper">
+  <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<!--<div th:insert="~{constellations::sky}">-->
+<!--  <div class="constellation-svg"></div>-->
+<!--</div>-->
+<div class="sky-star">
+  <div class="shooting-star1"></div>
+  <div class="shooting-star2"></div>
+  <div class="shooting-star3"></div>
+</div>
+<div class="dream-wrapper">
+  <p>Rewrite your dream</p>
+  <form th:action="@{/dreams/edit}" method="post" th:object="${dream}">
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-group">
+      <label for="title"></label>
+      <input type="text" id="title" th:field="*{title}" placeholder="Add title" required>
+    </div>
+    <div class="form-group">
+      <label for="description"></label>
+      <textarea id="description" th:field="*{description}" placeholder="Describe your dream..." required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="date"></label>
+      <input type="text" id="date" th:field="*{date}" placeholder="Dream date" required>
+    </div>
+    <div class="form-group">
+      <label for="mood-before-sleep"></label>
+      <input type="number" min="1" max="10" id="mood-before-sleep"
+             th:field="*{moodBeforeSleep}" placeholder="Mood before sleep (1-10)" required>
+    </div>
+    <div class="form-group">
+      <label for="mood-after-waking"></label>
+      <input type="number" min="1" max="10" id="mood-after-waking"
+             th:field="*{moodAfterWaking}" placeholder="Mood after waking up (1-10)" required>
+    </div>
+    <div class="form-group">
+      <label for="lucidity"></label>
+      <input type="number" min="1" max="5" id="lucidity"
+             th:field="*{lucidityLevel}" placeholder="How much control did you have? (1-5)" required>
+    </div>
+    <div class="form-group">
+      <label class="custom-checkbox">
+        <input type="hidden" name="nightmare" value="false"/>
+        <input class="switch" type="checkbox" id="nightmare" th:field="*{nightmare}" />
+        <span style="color: rgba(80, 70, 60, 0.6); font-style: italic;">Nightmare?</span>
+      </label>
+    </div>
+    <button type="submit">SAVE</button>
+  </form>
+  <a th:href="@{/user-own-page}" class="back-link">GO BACK</a>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('date');
+    dateInput.addEventListener('focus', (e) => {
+      e.target.type = 'date';
+    });
+    dateInput.addEventListener('blur', (e) => {
+      if (!e.target.value) e.target.type = 'text';
+    });
+  });
+</script>
+
+</body>
+</html>

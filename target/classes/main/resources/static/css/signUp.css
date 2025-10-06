@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --background-color: #352F44;
+    --form-bg-color: #FAF0E6;
+    --input-border-color: #B9B4C7;
+    --text-color-dark: rgba(28, 62, 147, 0.55);
+    --button-bg-color: #B9B4C7;
+    --hover-color: #e9bc5d;
+    --focus-glow-color: #8c78c0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --main-font: 'Roboto', sans-serif;
+    --placeholder-color: #888;
+    --error-color: #e74c3c;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--main-font);
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+}
+
+.register-wrapper {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+}
+
+.register-container {
+    width: 100%;
+    height: 100%;
+    max-width: 25rem;
+    max-height: 40rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(6px);
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+.register-form h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #f6f7fb;
+    letter-spacing: 0.2px;
+}
+
+.register-form button {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 6px;
+    background: linear-gradient(90deg,#6d8cff,#8ec1ff);
+    color: #06203b;
+    box-shadow: 0 6px 16px rgba(55,110,255,0.18);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.register-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.input-wrapper i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    width: 100%;
+    padding: 12px 38px 12px 38px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(10,16,34,0.6);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.input-wrapper input::placeholder {
+    color: var(--placeholder-color);
+    opacity: 0.8;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+    border-color: var(--focus-glow-color);
+    box-shadow: 0 0 0 2px rgba(140, 120, 192, 0.2);
+}
+
+.input-wrapper input[type=number]::-webkit-inner-spin-button,
+.input-wrapper input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: var(--placeholder-color);
+    background-image: url("data:image/svg+xml,%3Csvg fill='white' height='14' width='14' xmlns='http://www.w3.org/2000/svg'%3E<path d='M4 6l4 4 4-4z'/%3E</svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.input-wrapper select option {
+    background: rgb(8, 17, 40);
+    color: #fff;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(50%);
+    cursor: pointer;
+    color: #aaa;
+    font-size: 14px;
+}
+
+
+.terms-text {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+}
+
+.register-extra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.register-extra a {
+    color: #8ec1ff;
+    text-decoration: none;
+}
+
+.register-extra a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 550px) {
+    .register-form {
+        padding: 1.5rem;
+        border-radius: 0;
+        max-width: 90%;
+        margin: 0 1rem;
+    }
+    .register-form h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+    .register-form input,
+    .register-form button,
+    .register-form select {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+    }
+}

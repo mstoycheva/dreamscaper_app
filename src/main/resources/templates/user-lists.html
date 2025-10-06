@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users List</title>
+    <link rel="stylesheet" th:href="@{/css/Lists.css}"/>
+</head>
+<body>
+<div class="list-container">
+
+    <!-- Loop through users -->
+    <div class="list-card" th:each="user : ${users}">
+        <img th:src="${user.profilePicture != null ? user.profilePicture : '/default-profile.png'}"
+             th:alt="${user.username}"
+             width="100"
+             height="100"
+             onerror="this.src='/default-profile.png';"/>
+
+        <div class="list-info">
+            <h3 th:text="${user.username}">Username</h3>
+            <p>
+                <strong>Age:</strong>
+                <span th:text="${user.age}">0</span>
+            </p>
+            <p>
+                <strong>Sleep Quality:</strong>
+                <span th:text="${user.sleepQuality}">0</span>
+            </p>
+            <p>
+                <strong>Gender:</strong>
+                <span th:text="${user.gender}">N/A</span>
+            </p>
+            <p>
+                <strong>Email:</strong>
+                <span th:text="${user.email}">example@email.com</span>
+            </p>
+            <p>
+                <strong>Admin:</strong>
+                <span th:if="${user.admin}" class="badge">Yes</span>
+                <span th:if="${!user.admin}">No</span>
+            </p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

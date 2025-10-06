@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-color);
+}
+
+.page-wrapper {
+    background: repeating-linear-gradient(
+            #faf8f4,
+            #faf8f4 26px,
+            #f0ece4 27px
+    );
+    border: 2px solid #d1cfc5;
+    border-radius: 12px;
+    padding: 2.5rem;
+    max-width: 42rem;
+    margin: 3rem auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    color: #3b2f2f;
+    position: relative;
+    line-height: 1.8;
+}
+
+.page-wrapper::before {
+    content: "";
+    position: absolute;
+    left: 1.2rem;
+    top: 1.2rem;
+    bottom: 1.2rem;
+    width: 6px;
+    border-left: 3px dotted #b6a58e;
+}
+
+p, h4, h5 {
+    font-family: "Comic Neue", cursive;
+    font-style: italic;
+    color: #3b2f2f;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+h4 {
+    font-size: 1.4rem;
+}
+
+h2, span {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Petit Formal Script", cursive;
+    color: #3b2f2f;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.page-card {
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0f0;
+}
+
+.page-card:hover {
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+}
+
+.admin-panel {
+    border: 2px solid #6a5acd;
+    background: rgba(106, 90, 205, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.user-panel {
+    border: 2px solid #4a90e2;
+    background: rgba(74, 144, 226, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    background: #ffed9f;
+    color: #4a3a2c;
+    top: 1rem;
+    padding: 0.8rem 1.5rem;
+    left: 20rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.3);
+    transform: rotate(-8deg);
+    transition: all 0.2s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 20%;
+    width: 60%;
+    height: 10px;
+    background: rgba(206, 193, 193, 0.5);
+    transform: rotate(-3deg);
+    border-radius: 2px;
+}
+
+
+/* --- СТИЛЕН СКРОЛБАР --- */
+/* За Chrome, Edge, Safari */
+/*::-webkit-scrollbar {*/
+/*    width: 10px;*/
+/*}*/
+
+/*::-webkit-scrollbar-track {*/
+/*    background: #f0f0f5;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*    background: linear-gradient(180deg, #081128, rgba(11, 26, 59, 0.55));*/
+/*    border-radius: 10px;*/
+/*    border: 2px solid #f0f0f5;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: linear-gradient(180deg, #081128, rgba(11, 26, 59, 0.55));*/
+/*}*/
+
+@media (max-width: 600px) {
+    .page-wrapper {
+        margin: 1rem;
+        padding: 0 1rem;
+    }
+
+    .page-wrapper h2 {
+        font-size: 2rem;
+    }
+
+    .page-card {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>User Page</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/lists.css" th:href="@{/css/lists.css}"/>
+</head>
+<body>
+<div class="moon-wrapper">
+    <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<!--<div th:insert="~{constellations::sky}">-->
+<!--  <div class="constellation-svg"></div>-->
+<!--</div>-->
+<div class="sky-star">
+    <div class="shooting-star1"></div>
+    <div class="shooting-star2"></div>
+    <div class="shooting-star3"></div>
+</div>
+<div class="page-wrapper">
+    <h2>
+        <span th:text="${user.getUsername()}"></span>'s dreams
+    </h2>
+    <div th:if="${user.getAuthorities() == 'admin'}">
+        <p>Admin panel</p>
+        <h3>All dreams</h3>
+        <div th:if="${#lists.isEmpty(dreams)}">
+            <p>No dreams.</p>
+        </div>
+        <div th:each="dream : ${dreams}" class="dream-card">
+            <h3 th:text="${dream.title}">Dream Title</h3>
+            <p th:text="${dream.description}">Dream description...</p>
+        </div>
+    </div>
+    <div th:if="${user.getAuthorities() != 'admin'}">
+        <div th:if="${#lists.isEmpty(user.dreams)}">
+            <p>No dreams.</p>
+            <a th:href="@{/dreams/add}">Add a new dream</a>
+        </div>
+        <div th:each="dream : ${user.dreams}" class="dream-card">
+            <h4 th:text="${dream.title}">Dream Title</h4>
+            <h5 class="truncate" th:text="${dream.description}">Dream description...</h5>
+            <a class="btn" th:href="@{/full-info-dream/{id}(id=${dream.id})}">OPEN</a>
+            <a class="btn" th:href="@{/dreams/edit/{id}(id=${dream.id})}">REWRITE</a>
+        </div>
+        <a class="btn" th:href="@{/dreams/add}">ADD</a>
+    </div>
+</div>
+</body>
+</html>
