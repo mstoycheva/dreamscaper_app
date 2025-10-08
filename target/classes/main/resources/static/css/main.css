@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Space+Grotesk&display=swap');
-/* Variables */
 :root {
     --background-color: #0b1330;
     --second-background-color:  #0b1a3b;
@@ -14,7 +13,6 @@
     --main-font: 'Twklausanne 400', Arial,sans-serif;
 }
 
-/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -42,7 +40,6 @@ a {
     color: inherit;
 }
 
-/* Navbar */
 .navbar {
     width: 100%;
     padding: 1rem 1.5rem;
@@ -166,8 +163,6 @@ a {
     font-style: normal;
 }
 
-
-/* Footer */
 .footer {
     background-color: var(--background-color);
     color: var(--lightest-main-color);
@@ -248,8 +243,6 @@ a {
     animation: glow 5s ease-in-out infinite;
 }
 
-
-/* Responsive Styles */
 @media (max-width: 768px) {
     .navbar-container,
     .footer-container {

@@ -23,7 +23,6 @@ public class AuthenticationController {
 
     @GetMapping(value = "/sign-in")
     public String showSignInPage(Model model) {
-        //model.addAttribute("signInInfo", new SignInDTO());
         return "sign-in";
     }
 

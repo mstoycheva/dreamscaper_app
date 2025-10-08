@@ -33,10 +33,10 @@ public class UserController {
     @Value("${sync.uploads.folder:/tmp}")
     String uploadDirectory;
 
-    @GetMapping("users/create-user")
+    @GetMapping("users/add")
     public String createUser(Model model) {
         model.addAttribute("user",new User());
-        return "admin/create-user";
+        return "add-user";
     }
 
     @PostMapping(path = "/users", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
@@ -53,7 +53,7 @@ public class UserController {
     public String editUser(@PathVariable UUID id, Model model) {
         User editUser = userService.getUser(id);
         model.addAttribute("user", editUser);
-        return "admin/edit-user";
+        return "edit-user";
     }
 
     @PostMapping(value = "/users/edit-user")
@@ -66,17 +66,9 @@ public class UserController {
     public String usersView(Model model){
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
-        return "admin/users";
+        return "users";
     }
 
-    @GetMapping(value = "search")
-    public String getUsers(@RequestParam(required = false) String firstName,
-                           @RequestParam(required = false) String lastName,
-                           Model model) {
-        //List<User> search = userService.getUsersByFirstNameOrLastName(firstName, lastName);
-        //model.addAttribute("search", search);
-        return "admin/search";
-    }
 
     @GetMapping(value = "/profile")
     public String profile(Model model, Authentication authentication) {

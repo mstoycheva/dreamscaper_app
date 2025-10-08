@@ -29,24 +29,19 @@ public class DreamController {
         this.userService = userService;
     }
 
-    @PostMapping("/dreams")
-    public ResponseEntity<Dream> createDream(@RequestBody Dream dream,
-                                             @AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        Dream created = dreamService.createDreamForUser(dream, userDetails.getUsername());
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    @GetMapping(value = "/dreams")
+    public String viewDreams(Model model) {
+        List<Dream> dreams = dreamService.getDreams();
+        model.addAttribute("dreams", dreams);
+        return "dreams";
     }
 
-    @GetMapping("/dreams")
-    public ResponseEntity<?> getUserDreams(@AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        return ResponseEntity.ok(dreamService.getDreamsByUsername(userDetails.getUsername()));
+    @PostMapping(path = "/dreams", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public RedirectView submitAllDreamForm(Dream dream) {
+        dreamService.createDream(dream);
+        return new RedirectView("/dreams");
     }
+
 
     @GetMapping("/dreams/add")
     public String addDream(Model model) {
@@ -86,7 +81,6 @@ public class DreamController {
         model.addAttribute("dreams", dreams);
         return "user-own-page";
     }
-
 
     @PostMapping(path = "/user-own-page", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public RedirectView submitForm(Dream dream, @AuthenticationPrincipal UserDetails userDetails) {

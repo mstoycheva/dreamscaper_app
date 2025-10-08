@@ -20,7 +20,7 @@ html, body {
     border: 2px solid #d1cfc5;
     border-radius: 12px;
     padding: 2.5rem;
-    max-width: 42rem;
+    max-width: 50rem;
     margin: 3rem auto;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     color: #3b2f2f;
@@ -79,20 +79,12 @@ h2, span {
     transform: translateY(-4px);
 }
 
-.admin-panel {
-    border: 2px solid #6a5acd;
-    background: rgba(106, 90, 205, 0.05);
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.user-panel {
-    border: 2px solid #4a90e2;
-    background: rgba(74, 144, 226, 0.05);
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+.list-admin {
+    font-family: "Comic Neue", cursive;
+    font-size: 1.7rem;
+    font-style: italic;
+    color: #3b2f2f;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .btn {
@@ -100,7 +92,7 @@ h2, span {
     color: #4a3a2c;
     top: 1rem;
     padding: 0.8rem 1.5rem;
-    left: 20rem;
+    left: 25rem;
     font-weight: bold;
     font-size: 0.8rem;
     cursor: pointer;
@@ -148,7 +140,7 @@ h2, span {
 }
 
 .search-bar input {
-    width: 50%;
+    width: 65%;
     background-color: transparent;
     padding: 0.6rem 1rem;
     border: 2px dashed rgba(0,0,0,0.2);

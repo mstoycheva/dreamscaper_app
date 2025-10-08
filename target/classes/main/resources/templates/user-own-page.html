@@ -3,11 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>User Page</title>
+    <title th:text="${user.getUsername()}">'s page</title>
     <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../static/css/page.css" th:href="@{/css/page.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/css/lists.css" th:href="@{/css/lists.css}"/>
+    <script th:src="@{/js/deleteRows.js}"></script>
 </head>
 <body>
 <div class="moon-wrapper">
@@ -17,32 +17,29 @@
 </div>
 <div class="cloud cloud1"></div>
 <div class="cloud cloud2"></div>
-<!--<div class="sky-star">-->
-<!--    <div class="shooting-star1"></div>-->
-<!--    <div class="shooting-star2"></div>-->
-<!--    <div class="shooting-star3"></div>-->
-<!--</div>-->
 <div class="page-wrapper">
-    <h2>
-        <span th:text="${user.getUsername()}"></span>'s dreams
-    </h2>
-    <div th:if="${user.getAuthorities() == 'ADMIN'}">
-        <p>Admin panel</p>
-        <h3>All dreams</h3>
-        <div th:if="${#lists.isEmpty(dreams)}">
-            <p>No dreams.</p>
-        </div>
-        <div th:each="dream : ${dreams}" class="dream-card">
-            <h3 th:text="${dream.title}">Dream Title</h3>
-            <p th:text="${dream.description}">Dream description...</p>
+    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <h2>Admin panel</h2>
+    </div>
+    <div th:if="${!#authorization.expression('hasRole(''ADMIN'')')}">
+        <h2>
+            <span th:text="${user.getUsername()}"></span>'s dreams
+        </h2>
+    </div>
+    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <div class="dream-card">
+            <a class="list-admin" th:href="@{/dreams}">Dreams <i style="font-size: 0.75rem"> series of thoughts, images,
+                and sensations occurring in a person's mind during sleep</i></a><br>
+            <a class="list-admin" th:href="@{/users}">Users <i style="font-size: 0.75rem">people who dream</i></a><br>
+            <a class="list-admin" th:href="@{/interpretations}">Interpretations <i style="font-size: 0.75rem">the actions of explaining the meaning of dreams</i></a><br>
+            <a class="list-admin" th:href="@{/symbols}">Symbols <i style="font-size: 0.75rem">marks or characters used as conventional representations of dreams</i></a>
         </div>
     </div>
-    <a class="btn" style="transform: rotate(5deg); left: 22rem; margin-top: -2rem;" th:href="@{/dreams/add}">Share a new dream</a>
-    <div class="search-bar">
-        <label for="dreamSearch"></label><input type="text" id="dreamSearch" placeholder="Search dreams...">
-    </div>
-
-    <div th:if="${user.getAuthorities() != 'ADMIN'}">
+    <div th:if="${!#authorization.expression('hasRole(''ADMIN'')')}">
+        <a class="btn" style="transform: rotate(5deg); left: 32rem; margin-top: -2rem;" th:href="@{/dreams/add}">Share a new dream</a>
+        <div class="search-bar">
+            <label for="dreamSearch"></label><input type="text" id="dreamSearch" placeholder="Search dreams...">
+        </div>
         <div th:if="${#lists.isEmpty(user.dreams)}">
             <p>You have shared no dreams for now!</p>
         </div>
@@ -51,6 +48,7 @@
             <h5 class="truncate" th:text="${dream.description}">Dream description...</h5>
             <a class="btn" th:href="@{/full-info-dream/{id}(id=${dream.id})}">Open</a>
             <a class="btn" th:href="@{/dreams/edit/{id}(id=${dream.id})}">Rewrite</a>
+            <button class="btn" onclick="deleteDream(this)" th:name="${dream.getId()}">Delete</button>
         </div>
     </div>
 </div>

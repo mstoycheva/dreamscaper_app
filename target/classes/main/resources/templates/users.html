@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All users</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+    <script th:src="@{/js/deleteRows.js}"></script>
+</head>
+<body>
+<div class="moon-wrapper">
+    <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="page-wrapper">
+    <h2>All users</h2>
+    <div th:if="${#lists.isEmpty(users)}">
+        <p>No users.</p>
+    </div>
+    <a class="btn" style="transform: rotate(5deg); left: 32rem; margin-top: -2rem;" th:href="@{/dreams/add}">Share a new dream</a>
+    <div class="search-bar">
+        <label for="dreamSearch"></label><input type="text" id="dreamSearch" placeholder="Search dreams...">
+    </div>
+    <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to all dreams</a>
+    <div th:each="user : ${users}" class="dream-card">
+        <img th:src="${user.profilePicture != null ? user.profilePicture : '/default-profile.png'}"
+             th:alt="${user.username}"
+             width="100"
+             height="100"
+             onerror="this.src='/default-profile.png';"/>
+
+        <h4 th:text="${user.username}">Username</h4>
+        <h4 th:text="${user.email}">Email</h4>
+        <h4 th:text="${user.age}">Age</h4>
+        <h4 th:text="${user.gender}">Gender</h4>
+        <h4 th:text="${user.admin}">Admin</h4>
+        <a class="btn" th:href="@{/full-info-dream/{id}(id=${user.id})}">Open</a>
+        <a class="btn" th:href="@{/dreams/edit/{id}(id=${user.id})}">Edit</a>
+        <button style="border-color: #ffed9f" class="btn" th:name="${user.id}" onclick="deleteUser(this)">Delete</button>
+    </div>
+</div>
+
+<script>
+    const searchInput = document.getElementById('dreamSearch');
+    const dreamCards = document.querySelectorAll('.dream-card');
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+
+        dreamCards.forEach(card => {
+            const title = card.querySelector('h4, h3')?.textContent.toLowerCase() || '';
+            const description = card.querySelector('h5, p')?.textContent.toLowerCase() || '';
+
+            if (title.includes(query) || description.includes(query)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>
