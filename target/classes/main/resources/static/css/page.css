@@ -35,7 +35,7 @@ html, body {
     top: 1.2rem;
     bottom: 1.2rem;
     width: 6px;
-    border-left: 4px dotted #b6a58e;
+    border-left: 4px dotted #0b1330;
 }
 
 p, h4, h5 {
@@ -154,6 +154,118 @@ h2, span {
     outline: none;
     border-color: rgba(79, 99, 141, 0.55);
 }
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.user-card {
+    border-radius: 2px;
+    padding: 1.5rem 2rem;
+    border: 2px solid #e2ded3;
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transform: rotate(var(--rotate, -1.5deg));
+    transition: all 0.3s ease;
+    max-width: 95%;
+    margin: auto;
+}
+
+.user-card.male {
+    background-color: #e0f0ff;
+}
+
+.user-card.female {
+    background-color: #ffe4ec;
+}
+
+.user-card.none {
+    background-color: #f3e6ff;
+}
+
+
+.user-card:nth-child(even) {
+    --rotate: 2deg;
+}
+.user-card::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 90px;
+    height: 28px;
+    background: repeating-linear-gradient(
+            45deg,
+            #ffecb3,
+            #ffecb3 6px,
+            #ffd5d5 6px,
+            #ffd5d5 12px
+    );
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    opacity: 0.9;
+}
+
+
+.user-card.tape-blue::before {
+    background: repeating-linear-gradient(45deg, #a5d8ff, #a5d8ff 6px, #cce5ff 6px, #cce5ff 12px);
+}
+.user-card.tape-pink::before {
+    background: repeating-linear-gradient(45deg, #ffc1dc, #ffc1dc 6px, #ffd6e5 6px, #ffd6e5 12px);
+}
+.user-card.tape-purple::before {
+    background: repeating-linear-gradient(45deg, #decaff, #decaff 6px, #e9d8ff 6px, #e9d8ff 12px);
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.profile-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px dashed rgba(8, 17, 40, 0.4);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    background: #faf8f4;
+}
+
+.user-details h4 {
+    font-family: "Comic Neue", cursive;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: #3b2f2f;
+    margin-bottom: 0.3rem;
+}
+
+.user-details p, .user-details span {
+    font-family: "Comic Neue", cursive;
+    font-style: italic;
+    font-size: 1rem;
+    color: #3b2f2f;
+    margin: 0.2rem 0;
+}
+
+.user-actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.delete-btn {
+    border: #ffed9f;
+}
+
 
 @media (max-width: 600px) {
     .page-wrapper {

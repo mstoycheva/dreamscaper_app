@@ -26,13 +26,13 @@
     <div class="search-bar">
         <label for="dreamSearch"></label><input type="text" id="dreamSearch" placeholder="Search dreams...">
     </div>
-    <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to all dreams</a>
+    <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to admin panel</a>
     <div th:each="alldream : ${dreams}" class="dream-card">
         <h4 th:text="${alldream.title}">Dream Title</h4>
         <h5 class="truncate" th:text="${alldream.description}">Dream description...</h5>
         <a class="btn" th:href="@{/full-info-dream/{id}(id=${alldream.id})}">Open</a>
         <a class="btn" th:href="@{/dreams/edit/{id}(id=${alldream.id})}">Rewrite</a>
-        <button style="border-color: #ffed9f" class="btn" th:name="${alldream.id}" onclick="deleteDream(this)">Delete</button>
+        <button style="border-color: #ffed9f" class="btn delete-btn" th:name="${alldream.id}" onclick="deleteDream(this)">Delete</button>
     </div>
 </div>
 

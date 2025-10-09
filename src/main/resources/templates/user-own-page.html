@@ -48,7 +48,7 @@
             <h5 class="truncate" th:text="${dream.description}">Dream description...</h5>
             <a class="btn" th:href="@{/full-info-dream/{id}(id=${dream.id})}">Open</a>
             <a class="btn" th:href="@{/dreams/edit/{id}(id=${dream.id})}">Rewrite</a>
-            <button class="btn" onclick="deleteDream(this)" th:name="${dream.getId()}">Delete</button>
+            <button class="btn delete-btn" onclick="deleteDream(this)" th:name="${dream.getId()}">Delete</button>
         </div>
     </div>
 </div>

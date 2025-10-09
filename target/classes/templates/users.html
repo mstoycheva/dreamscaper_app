@@ -22,32 +22,24 @@
     <div th:if="${#lists.isEmpty(users)}">
         <p>No users.</p>
     </div>
-    <a class="btn" style="transform: rotate(5deg); left: 32rem; margin-top: -2rem;" th:href="@{/dreams/add}">Share a new dream</a>
+    <a class="btn" style="transform: rotate(5deg); left: 32rem; margin-top: -2rem;" th:href="@{/users/add}">Add a new user</a>
     <div class="search-bar">
-        <label for="dreamSearch"></label><input type="text" id="dreamSearch" placeholder="Search dreams...">
+        <label for="userSearch"></label><input type="text" id="userSearch" placeholder="Search users...">
     </div>
-    <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to all dreams</a>
-    <div th:each="user : ${users}" class="dream-card">
-        <img th:src="${user.profilePicture != null ? user.profilePicture : '/default-profile.png'}"
-             th:alt="${user.username}"
-             width="100"
-             height="100"
-             onerror="this.src='/default-profile.png';"/>
+    <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to admin panel</a>
+    <p>The dreamers are:</p>
 
-        <h4 th:text="${user.username}">Username</h4>
-        <h4 th:text="${user.email}">Email</h4>
-        <h4 th:text="${user.age}">Age</h4>
-        <h4 th:text="${user.gender}">Gender</h4>
-        <h4 th:text="${user.admin}">Admin</h4>
-        <a class="btn" th:href="@{/full-info-dream/{id}(id=${user.id})}">Open</a>
-        <a class="btn" th:href="@{/dreams/edit/{id}(id=${user.id})}">Edit</a>
-        <button style="border-color: #ffed9f" class="btn" th:name="${user.id}" onclick="deleteUser(this)">Delete</button>
+    <div th:each="user : ${users}" style="margin-bottom: 0.5rem; font-family: Arial, sans-serif;">
+        <span th:text="${user.username}" style="font-weight: bold; font-family: 'Comic Neue', cursive"></span>
+        <a th:href="@{/dreams/view/{id}(id=${user.id})}" style="margin-left: 0.5rem; font-size: 0.9rem; text-decoration: none;">Open</a>
+        <a th:href="@{/dreams/edit/{id}(id=${user.id})}" style="margin-left: 0.3rem; font-size: 0.9rem; text-decoration: none;">Edit</a>
+        <button th:attr="data-id=${user.id}" onclick="deleteUser(this)" style="margin-left: 0.3rem; font-size: 0.9rem; background: none; border: none; cursor: pointer;">Delete</button>
     </div>
+
 </div>
-
 <script>
-    const searchInput = document.getElementById('dreamSearch');
-    const dreamCards = document.querySelectorAll('.dream-card');
+    const searchInput = document.getElementById('userSearch');
+    const dreamCards = document.querySelectorAll('.user-card');
 
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.toLowerCase();
