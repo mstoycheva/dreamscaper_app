@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Add a new user</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/signUp.css" th:href="@{/css/signUp.css}"/>
+<!--  <link rel="stylesheet" type="text/css" href="../static/css/editing.css" th:href="@{/css/editing.css}"/>-->
+  <link rel="stylesheet" type="text/css" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+  <link rel="stylesheet" type="text/css" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+</head>
+<body>
+<div class="moon-wrapper">
+  <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<!--<div th:insert="~{constellations::sky}">-->
+<!--  <div class="constellation-svg"></div>-->
+<!--</div>-->
+<div class="sky-star">
+  <div class="shooting-star1"></div>
+  <div class="shooting-star2"></div>
+  <div class="shooting-star3"></div>
+</div>
+<main class="register-wrapper" role="main">
+  <div class="register-container">
+    <form id="registerForm" th:object="${user}" th:action="@{/users/add}" method = "post" class="register-form" autocomplete="on" novalidate>
+      <h2>Add a new user</h2>
+
+      <div class="input-wrapper">
+        <i class="fa fa-user"></i>
+        <label for="username">
+          <input th:field="*{username}" id="username" name="username" type="text" placeholder="Username" autocomplete="username" required />
+        </label>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="fa fa-envelope"></i>
+        <label for="email">
+          <input th:field="*{email}" id="email" name="email" type="email" placeholder="Email" autocomplete="email" required />
+        </label>
+      </div>
+      <div class="input-wrapper selectWrapper">
+        <i class="fa fa-venus-mars"></i>
+        <select th:field="*{gender}" id="gender" name="gender" class="selectBox" required>
+          <option value="">Select a gender</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+          <option value="N">Prefer not to say</option>
+        </select>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="fa fa-calendar"></i>
+        <label for="age"><input th:field="*{age}" id="age" name="age" type="number" placeholder="Age" min="0" max="120" required /></label>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="fa fa-lock"></i>
+        <label for="password"><input th:field="*{password}" id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" required /></label>
+        <!--                <i class="fa fa-eye-slash toggle-password" id="togglePassword"></i>-->
+      </div>
+
+      <button type="submit" class="a-btn" id="submitBtn">Add</button>
+      <a th:href="@{/users}" class="terms-text" style="align-content: center">Back to all users</a>
+      <div th:if="${param.error}" class="error-message">
+        <p th:if="${param.error[0] == 'username_exists'}">Username is unavailable</p>
+      </div>
+      <p id="message" class="msg" style="display:none;"></p>
+    </form>
+  </div>
+</main>
+<script>
+  const togglePassword = document.getElementById('togglePassword');
+  const password = document.getElementById('password');
+
+  togglePassword.addEventListener('click', () => {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    togglePassword.classList.toggle('fa-eye');
+    togglePassword.classList.toggle('fa-eye-slash');
+  });
+
+  const toggleRepeat = document.getElementById('toggleConfirmPassword');
+  const confirmPassword = document.getElementById('confirm-password');
+
+  toggleRepeat.addEventListener('click', () => {
+    const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+    confirmPassword.setAttribute('type', type);
+    toggleRepeat.classList.toggle('fa-eye');
+    toggleRepeat.classList.toggle('fa-eye-slash');
+  });
+
+</script>
+</body>
+</html>

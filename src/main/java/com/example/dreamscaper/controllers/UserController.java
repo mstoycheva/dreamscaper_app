@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,12 @@ public class UserController {
     public String createUser(Model model) {
         model.addAttribute("user",new User());
         return "add-user";
+    }
+
+    @PostMapping(path = "/users/add", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public RedirectView submitUserForm(User user) {
+        userService.createUser(user);
+        return new RedirectView("/users/add");
     }
 
     @PostMapping(path = "/users", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
@@ -67,6 +75,19 @@ public class UserController {
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
         return "users";
+    }
+
+    @GetMapping("/full-info-user/{id}")
+    public String viewUser(@PathVariable UUID id, Model model) {
+        User user = userService.getUser(id);
+        model.addAttribute("user", user);
+        return "full-info-dream";
+    }
+
+    @PostMapping("/full-info-user")
+    public String updateUserInfo(@ModelAttribute("user") User updatedUser) {
+        userService.editUser(updatedUser);
+        return "redirect:/user-own-page";
     }
 
 
