@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="'User - ' + ${user.username}">Dream Info</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animatedObjects.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/page.css}"/>
+</head>
+<body>
+<div class="moon-wrapper">
+    <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="page-wrapper">
+    <div class="user-list">
+        <div class="user-card"
+             th:classappend="${user.gender == 'Male'} ? ' male tape-blue' :
+            (${user.gender == 'Female'} ? ' female tape-pink' : ' none tape-purple')">
+            <div class="user-info">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative;">
+                    <label style="cursor: pointer; position: relative;">
+                        <img id="profile-pic"
+                             th:src="@{/profile-picture}"
+                             onerror="this.src='../images/default.png';"
+                             class="profile-pic" alt="photo">
+                        <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="uploadAndPreview(this)">
+                    </label>
+                    <p style="font-size: 0.8rem; color: #555; font-family: 'Comic Neue', cursive; font-style: italic;">
+                        Click to change photo
+                    </p>
+                </div>
+                <div class="user-details">
+                    <h4 th:text="${user.username}">Username</h4>
+                    <p>Email: <span th:text="${user.email}">email@example.com</span></p>
+                    <p>Gender: <span th:text="${user.gender}">None</span></p>
+                    <p>Age: <span th:text="${user.age}">18</span></p>
+                    <p>Dreams: <span th:text="${user.getDreams()}">Sth..</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        <a th:href="@{/user-own-page}" class="btn" style="top: 2.5rem; left: 23rem">Back to all users</a>
+    </p>
+</div>
+<script th:src="@{/js/changePhoto.js?v=20251011}"></script>
+</body>
+</html>

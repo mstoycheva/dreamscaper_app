@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rewrite user</title>
+    <link rel="stylesheet" th:href="@{/css/editing.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/animatedObjects.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="moon-wrapper">
+    <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="user-wrapper">
+    <p>Rewrite your user</p>
+    <form th:action="@{/users/edit}" method="post" th:object="${user}">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label for="username" style="font-family: 'Comic Neue', cursive; font-style: italic">Username</label>
+            <input type="text" id="username" th:field="*{username}" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="age" style="font-family: 'Comic Neue', cursive; font-style: italic">Age</label>
+            <textarea id="age" th:field="*{age}" placeholder="Describe your user..." required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="gender" style="font-family: 'Comic Neue', cursive; font-style: italic">Gender</label>
+            <input type="text" id="gender" th:field="*{gender}" placeholder="Dream date" required>
+        </div>
+        <div class="form-group">
+            <label for="mood-before-sleep" style="font-family: 'Comic Neue', cursive; font-style: italic">Email</label>
+            <input type="number" min="1" max="10" id="mood-before-sleep"
+                   th:field="*{email}" placeholder="Mood before sleep (1-10)" required>
+        </div>
+        <div class="form-group">
+            <label for="lucidity" style="font-family: 'Comic Neue', cursive; font-style: italic">Profile picture</label>
+            <input type="number" min="1" max="5" id="lucidity"
+                   th:field="*{profilePicture}" placeholder="How much control did you have? (1-5)" required>
+        </div>
+        <div class="form-group">
+            <label class="custom-checkbox">
+                <input type="hidden" name="admin" value="false"/>
+                <input class="switch" type="checkbox" id="nightmare" th:field="*{admin}" />
+                <span  style="color: rgba(80, 70, 60, 0.6); font-style: italic; font-family: 'Comic Neue',serif">Admin?</span>
+            </label>
+        </div>
+    </form>
+    <button type="submit" style="font-style: italic; top: -1rem">Save</button>
+    <a th:href="@{/user-own-page}" style="font-style: italic; left: 21rem" class="back-link">Back to all users</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateInput = document.getElementById('date');
+        dateInput.addEventListener('focus', (e) => {
+            e.target.type = 'date';
+        });
+        dateInput.addEventListener('blur', (e) => {
+            if (!e.target.value) e.target.type = 'text';
+        });
+    });
+</script>
+
+</body>
+</html>

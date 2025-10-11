@@ -27,26 +27,29 @@
         <label for="userSearch"></label><input type="text" id="userSearch" placeholder="Search users...">
     </div>
     <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to admin panel</a>
-    <div th:each="user : ${users}" style="margin-bottom: 0.5rem; font-family: Arial, sans-serif;">
-        <span th:text="${user.username}" style="font-weight: bold; font-family: 'Comic Neue', cursive"></span>
-        <a th:href="@{/dreams/view/{id}(id=${user.id})}" style="margin-left: 0.5rem; font-size: 0.9rem; text-decoration: none;">Open</a>
-        <a th:href="@{/dreams/edit/{id}(id=${user.id})}" style="margin-left: 0.3rem; font-size: 0.9rem; text-decoration: none;">Edit</a>
-        <button th:attr="data-id=${user.id}" onclick="deleteUser(this)" style="margin-left: 0.3rem; font-size: 0.9rem; background: none; border: none; cursor: pointer;">Delete</button>
+    <div th:each="user : ${users}" class="dream-card"
+         style="margin-bottom: 0.5rem; font-family: Arial, sans-serif;">
+    <span class="username" th:text="${user.username}"
+          style="font-weight: bold; font-family: 'Comic Neue', cursive"></span>
+        <a th:href="@{/full-info-user/{id}(id=${user.id})}"
+           style="margin-left: 0.5rem; font-size: 0.9rem; text-decoration: none; font-family: 'Comic Neue', cursive; color: #1b2735">open</a>
+        <a th:href="@{/users/edit/{id}(id=${user.id})}"
+           style="margin-left: 0.3rem; font-size: 0.9rem; text-decoration: none; font-family: 'Comic Neue', cursive; color: #1b2735">edit</a>
+        <button th:attr="data-id=${user.id}" onclick="deleteUser(this)" style="margin-left: 0.3rem; font-size: 0.9rem; background: none;
+        border: none; cursor: pointer; font-family: 'Comic Neue', cursive; color: #1b2735">delete</button>
     </div>
-
 </div>
 <script>
     const searchInput = document.getElementById('userSearch');
-    const dreamCards = document.querySelectorAll('.user-card');
+    const dreamCards = document.querySelectorAll('.dream-card');
 
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.toLowerCase();
 
         dreamCards.forEach(card => {
-            const title = card.querySelector('h4, h3')?.textContent.toLowerCase() || '';
-            const description = card.querySelector('h5, p')?.textContent.toLowerCase() || '';
+            const username = card.querySelector('.username')?.textContent.toLowerCase() || '';
 
-            if (title.includes(query) || description.includes(query)) {
+            if (username.includes(query)) {
                 card.style.display = 'block';
             } else {
                 card.style.display = 'none';

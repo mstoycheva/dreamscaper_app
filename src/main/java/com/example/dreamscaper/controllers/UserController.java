@@ -1,8 +1,6 @@
 package com.example.dreamscaper.controllers;
 
-import com.example.dreamscaper.models.Dream;
 import com.example.dreamscaper.models.User;
-import com.example.dreamscaper.services.DreamService;
 import com.example.dreamscaper.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,8 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -81,7 +80,7 @@ public class UserController {
     public String viewUser(@PathVariable UUID id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
-        return "full-info-dream";
+        return "full-info-user";
     }
 
     @PostMapping("/full-info-user")
@@ -107,7 +106,6 @@ public class UserController {
         return new RedirectView("/profile");
     }
 
-
     @GetMapping(value = "/profile-picture", produces = "image/*")
     public ResponseEntity<ByteArrayResource> getUserProfilePicture(Authentication authentication) throws IOException {
         User currentUser = (User) authentication.getPrincipal();
@@ -116,13 +114,14 @@ public class UserController {
         FilenameFilter filter = (dir1, name) -> name.contains(String.valueOf(id));
         String[] files = dir.list(filter);
 
-        if (files != null && files.length > 0) {
-            Logger.getAnonymousLogger().info("File path is: " + uploadDirectory + File.separator + files[0]);
-            try (FileInputStream fs = new FileInputStream(uploadDirectory + File.separator + files[0])) {
-                return ResponseEntity.ok(new ByteArrayResource(fs.readAllBytes()));
-            } catch (FileNotFoundException exception) {
-                Logger.getAnonymousLogger().info("Profile picture cannot be found for user with id: " + id);
+        try (InputStream defaultFs = getClass().getClassLoader().getResourceAsStream("static/images/default-user.png")) {
+            if (defaultFs != null) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_PNG)
+                        .body(new ByteArrayResource(defaultFs.readAllBytes()));
             }
+        } catch (IOException e) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Failed to load default profile picture.", e);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }

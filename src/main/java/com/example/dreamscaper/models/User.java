@@ -54,7 +54,6 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Dream> dreams;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String role = this.admin ? "ROLE_ADMIN" : "ROLE_USER";

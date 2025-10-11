@@ -156,7 +156,7 @@ h2, span {
 }
 
 .user-list {
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     gap: 2rem;
     margin-top: 2rem;
@@ -266,6 +266,9 @@ h2, span {
     border: #ffed9f;
 }
 
+.list-user {
+    display: flex;
+}
 
 @media (max-width: 600px) {
     .page-wrapper {
