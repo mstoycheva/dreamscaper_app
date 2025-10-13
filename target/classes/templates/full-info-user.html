@@ -17,22 +17,25 @@
 <div class="cloud cloud2"></div>
 <div class="page-wrapper">
     <div class="user-list">
-        <div class="user-card"
-             th:classappend="${user.gender == 'Male'} ? ' male tape-blue' :
-            (${user.gender == 'Female'} ? ' female tape-pink' : ' none tape-purple')">
-            <div class="user-info">
+        <div th:class="'user-card ' +
+               (${user.gender} == 'M' ? 'male tape-blue' :
+               (${user.gender} == 'F' ? 'female tape-pink' : 'none tape-purple'))">
+        <div class="user-info">
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative;">
                     <label style="cursor: pointer; position: relative;">
                         <img id="profile-pic"
-                             th:src="@{/profile-picture}"
-                             onerror="this.src='../images/default.png';"
-                             class="profile-pic" alt="photo">
-                        <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="uploadAndPreview(this)">
+                             th:src="@{/profile-picture/{id}(id=${user.id})}"
+                             onerror="this.src='/images/default.png';"
+                             class="profile-pic"
+                             alt="Profile Picture">
+                        <input type="file" id="file-input" accept="image/*"
+                               style="display: none;" onchange="uploadAndPreview(this)">
                     </label>
                     <p style="font-size: 0.8rem; color: #555; font-family: 'Comic Neue', cursive; font-style: italic;">
                         Click to change photo
                     </p>
                 </div>
+
                 <div class="user-details">
                     <h4 th:text="${user.username}">Username</h4>
                     <p>Email: <span th:text="${user.email}">email@example.com</span></p>
@@ -42,6 +45,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <p>
         <a th:href="@{/user-own-page}" class="btn" style="top: 2.5rem; left: 23rem">Back to all users</a>

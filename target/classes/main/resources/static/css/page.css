@@ -263,7 +263,20 @@ h2, span {
 }
 
 .delete-btn {
-    border: #ffed9f;
+    background: #ff9f9f;
+    color: #4a2c2c;
+    top: 1rem;
+    padding: 0.8rem 1.5rem;
+    left: 25rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-style: italic;
+    box-shadow: 4px 5px 5px rgba(0, 0, 0, 0.3);
+    transform: rotate(-8deg);
+    transition: all 0.2s ease;
+    position: relative;
+    display: inline-block;
 }
 
 .list-user {

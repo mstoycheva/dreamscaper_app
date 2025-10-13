@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>All symbols</title>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/animatedObjects.css" th:href="@{/css/animatedObjects.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/page.css" th:href="@{/css/page.css}"/>
+  <script th:src="@{/js/deleteRows.js}"></script>
+</head>
+<body>
+<div class="moon-wrapper">
+  <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="page-wrapper">
+  <h2>All users' symbols</h2>
+  <div th:if="${#lists.isEmpty(symbols)}">
+    <p>No symbols.</p>
+  </div>
+  <a class="btn" style="transform: rotate(5deg); left: 32rem; margin-top: -2rem;" th:href="@{/symbols/add}">Share a new symbol</a>
+  <div class="search-bar">
+    <label for="symbolSearch"></label><input type="text" id="symbolSearch" placeholder="Search symbols...">
+  </div>
+  <a th:href="@{/user-own-page}" style="left: 32rem" class="btn">Back to admin panel</a>
+  <div th:each="allsymbol : ${symbols}" class="dream-card">
+    <h4 th:text="${allsymbol.name}">Symbol</h4>
+    <h5 class="truncate" th:text="${allsymbol.type}">Symbol type...</h5>
+    <a class="btn" th:href="@{/full-info-symbol/{id}(id=${allsymbol.id})}">Open</a>
+    <a class="btn" th:href="@{/symbols/edit/{id}(id=${allsymbol.id})}">Rewrite</a>
+    <button style="border-color: #ffed9f" class="btn delete-btn" th:name="${allsymbol.id}" onclick="deleteDream(this)">Delete</button>
+  </div>
+</div>
+
+<script>
+  const searchInput = document.getElementById('symbolSearch');
+  const symbolCards = document.querySelectorAll('.dream-card');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+
+    symbolCards.forEach(card => {
+      const title = card.querySelector('h4, h3')?.textContent.toLowerCase() || '';
+      const description = card.querySelector('h5, p')?.textContent.toLowerCase() || '';
+
+      if (title.includes(query) || description.includes(query)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
