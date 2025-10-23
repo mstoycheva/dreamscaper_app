@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rewrite interpretation</title>
+    <link rel="stylesheet" th:href="@{/css/editing.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/animatedObjects.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="moon-wrapper">
+    <div class="moon"></div>
+</div>
+<div class="stars">
+</div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="symbol-wrapper">
+    <p>Rewrite your symbol</p>
+    <form th:action="@{/interpretations/edit}" method="post" th:object="${interpretation}">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label for="name" style="font-family: 'Comic Neue', cursive; font-style: italic">Name</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="Add name" required>
+        </div>
+        <div class="form-group">
+            <label for="type" style="font-family: 'Comic Neue', cursive; font-style: italic">Type</label>
+            <textarea id="type" th:field="*{type}" placeholder="Edit type..." required></textarea>
+        </div>
+    </form>
+    <button type="submit" style="font-style: italic; top: -1rem">Save</button>
+    <a th:href="@{/user-own-page}" style="font-style: italic; left: 21rem" class="back-link">Back to all symbols</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateInput = document.getElementById('date');
+        dateInput.addEventListener('focus', (e) => {
+            e.target.type = 'date';
+        });
+        dateInput.addEventListener('blur', (e) => {
+            if (!e.target.value) e.target.type = 'text';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -20,10 +20,10 @@ public class InterpretationService {
         return interpretationRepository.findAll();
     }
 
-//    public Interpretation getInterpretation(UUID id) {
-//        Optional<Interpretation> interpretation = interpretationRepository.findById(id);
-//        return interpretation.orElse(null);
-//    }
+    public Interpretation getInterpretation(UUID id) {
+        Optional<Interpretation> interpretation = interpretationRepository.findById(id);
+        return interpretation.orElse(null);
+    }
 
     public void createInterpretation(Interpretation interpretation) {
         interpretationRepository.saveAndFlush(interpretation);
@@ -32,8 +32,8 @@ public class InterpretationService {
     public void editInterpretation(Interpretation interpretation) {
         interpretationRepository.save(interpretation);
     }
-//
-//    public void deleteInterpretation(UUID id) {
-//        interpretationRepository.deleteById(id);
-//    }
+
+    public void deleteInterpretation(UUID id) {
+        interpretationRepository.deleteById(id);
+    }
 }
