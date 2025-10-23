@@ -24,7 +24,7 @@
 </div>
 <div class="dream-wrapper">
     <p>Add a new interpretation</p>
-    <form th:action="@{/interpretations/add}" method="post" th:object="${interpretation}">
+    <form th:action="@{/interpretations/add}" method="post" th:object="${i}">
         <div class="form-group">
             <label for="name"></label>
             <input type="text" id="name" th:field="*{interpretationName}" placeholder="Interpretation name..." required>
